@@ -1,6 +1,6 @@
 import Fastify from "fastify"
 import fastifyBasicAuth from "@fastify/basic-auth"
-
+import {readFile} from 'node:fs';
 
 const port = 3000;
 const authenticate = {realm: 'Westeros'}
@@ -32,6 +32,18 @@ fastify.after(() => {
         handler: async (req, reply) => {
             return {
                 replique: 'Un Lannister paye toujours ses dettes !'
+            }
+        }
+    })
+})
+
+fastify.after(() => {
+    fastify.route({
+        method: 'GET',
+        url: '/autre',
+        handler: async (req, reply) => {
+            return {
+                replique: 'Un Lannister ne paye jamais ses dettes :/'
             }
         }
     })
