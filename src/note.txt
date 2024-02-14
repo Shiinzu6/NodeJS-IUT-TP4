@@ -17,10 +17,13 @@ Cette commande m'a permit de signer le .csr avec la clé privée:
 openssl req -key server.key -new -x509 -days 3 -out MYCSR.csr
 
 Pour créer ma clé privée RSA ainsi que le csr :
-openssl req -newkey rsa:1024 -keyout server.key -out MYCSR.csr
+openssl req -newkey rsa:2048 -keyout server.key -out MYCSR.csr
 
 
 Réponse à la remarque de l'étape 2 :
+
+// DIRE CE QUE SIGNIFIE LE RETOUR QU'ON A VIA POSTMAN
+// LORS DU TEST AVEC https://adresse:4567
 
 Le fait d'utiliser la méthode readFileSync() qui est sychrone, c'est d'attendre
 que la connexion soit sécurisé, on attend de lire les clés et  de les vérifier
