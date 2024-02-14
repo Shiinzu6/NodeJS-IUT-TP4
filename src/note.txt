@@ -1,0 +1,32 @@
+
+
+
+URL DANS POSTMAN :
+
+https://10.125.133.172:4567, l'ip est celle de mon server Debian que j'ai eu avec
+la commande : ip a
+
+4567 c'est le port que j'ai mis dans la commande :
+Cette comande est pour tester si la signature marche bien avec la clé
+openssl s_server -accept 4567 -cert cert.crt -key server.key -www -state
+
+Cette commande permet de créer le .crt a partir de la clé privée et du csr :
+openssl req -key server.key -new -x509 -days 3 -in MYCSR.csr -out cert.crt
+
+Cette commande m'a permit de signer le .csr avec la clé privée:
+openssl req -key server.key -new -x509 -days 3 -out MYCSR.csr
+
+Pour créer ma clé privée RSA ainsi que le csr :
+openssl req -newkey rsa:1024 -keyout server.key -out MYCSR.csr
+
+
+Réponse à la remarque de l'étape 2 :
+
+Le fait d'utiliser la méthode readFileSync() qui est sychrone, c'est d'attendre
+que la connexion soit sécurisé, on attend de lire les clés et  de les vérifier
+avant de poser des questions, d'envoyer des requetes a mon serveur.
+
+Si on avait une fonction asynchrone pour lire les fichiers, on demanderait des
+requetes au serveur sans avoir établi la connexion sécurisé et on aurait donc
+des erreurs.
+
